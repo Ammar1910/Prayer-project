@@ -144,15 +144,15 @@ export default function MainContent() {
             <Grid dir='rtl' container>
                 <Grid size={6}>
                     <div>
-                        <h2 style={{color : "gray"}}>{today}</h2>
+                        <h2 style={{ color: "gray" }}>{today}</h2>
                         <h1>{selectdCity.displayName}</h1>
-                    
+
                     </div>
 
                 </Grid>
                 <Grid size={6}>
                     <div>
-                        <h2 style={{color: "gray"}}>متبقي حتي صلاة {prayersArray[nextPrayerIndex].Name}</h2>
+                        <h2 style={{ color: "gray" }}>متبقي حتي صلاة {prayersArray[nextPrayerIndex].Name}</h2>
                         <h1 >{remainingTime}</h1>
                     </div>
                 </Grid>
