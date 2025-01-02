@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import "moment/dist/locale/ar-dz"
+import "moment/dist/locale/ar"
 moment.locale("ar");
 export default function MainContent() {
     const [remainingTime, setRemainingTime] = useState("")
@@ -44,6 +44,10 @@ export default function MainContent() {
         {
             displayName: "كفر تورمص",
             apiName: "cairo"
+        },
+        {
+            displayName: "الشرقية",
+            apiName: "Ash Sharqīyah"
         }
     ];
 
@@ -56,11 +60,11 @@ export default function MainContent() {
 
     ];
     const getTiming = async () => {
-        console.log("calling api")
+
         const response = await axios.get(`https://api.aladhan.com/v1/timingsByCity?country=EG&city=${selectdCity.apiName}`)
 
         setTimings(response.data.data.timings)
-        // timing = .timings
+
 
     }
 
@@ -92,22 +96,22 @@ export default function MainContent() {
 
 
         if (momentNow.isAfter(moment(timings["Fajr"], "hh:mm")) && momentNow.isBefore(moment(timings["Dhuhr"], "hh:mm"))) {
-            // console.log("the next Prayer Dhuhr")
+
             prayerIndex = 1
 
         } else if (momentNow.isAfter(moment(timings["Dhuhr"], "hh:mm")) && momentNow.isBefore(moment(timings["Asr"], "hh:mm"))) {
             prayerIndex = 2
-            // console.log("the next Prayer Asr")
+
         } else if (momentNow.isAfter(moment(timings["Asr"], "hh:mm")) && momentNow.isBefore(moment(timings["Maghrib"], "hh:mm"))) {
-            // console.log("the next Prayer Maghrib")
+
             prayerIndex = 3
 
         } else if (momentNow.isAfter(moment(timings["Maghrib"], "hh:mm")) && momentNow.isBefore(moment(timings["Isha"], "hh:mm"))) {
-            // console.log("the next Prayer Isha")
+
             prayerIndex = 4
 
         } else {
-            // console.log("the next Prayer Fajr")
+
             prayerIndex = 0
 
         }
@@ -123,11 +127,9 @@ export default function MainContent() {
             const fajrToMidnightDiff = nextPrayerTimeMoment.diff(moment("00:00:00", "hh:mm:ss"))
             const totalDiff = midnightDiff + fajrToMidnightDiff
             remainingTime = totalDiff
-            console.log(totalDiff)
+
         }
-        console.log(nextPrayerTiming)
-        console.log(remainingTime)
-        console.log(durationRemainingTime.hours(), durationRemainingTime.minutes())
+
         setRemainingTime(`${durationRemainingTime.seconds()} : ${durationRemainingTime.minutes()} : ${durationRemainingTime.hours()}`)
 
 
@@ -137,23 +139,24 @@ export default function MainContent() {
 
 
 
+
     return (
 
         <>
 
             <Grid dir='rtl' container>
                 <Grid size={6}>
-                    <div>
-                        <h2 style={{ color: "gray" }}>{today}</h2>
-                        <h1>{selectdCity.displayName}</h1>
+                    <div >
+                        <h2 className='x' style={{ color: "gray" }}>{today}</h2>
+                        <h1 className='fontResponsive'>{selectdCity.displayName}</h1>
 
                     </div>
 
                 </Grid>
                 <Grid size={6}>
                     <div>
-                        <h2 style={{ color: "gray" }}>متبقي حتي صلاة {prayersArray[nextPrayerIndex].Name}</h2>
-                        <h1 >{remainingTime}</h1>
+                        <h2 className='x' style={{ color: "gray" }}>متبقي حتي صلاة {prayersArray[nextPrayerIndex].Name}</h2>
+                        <h1 className='fontResponsive' >{remainingTime}</h1>
                     </div>
                 </Grid>
             </Grid>
@@ -161,16 +164,24 @@ export default function MainContent() {
 
             {/* مواقيت الصلوات */}
             <Stack dir='rtl' direction="row" justifyContent={"space-around"} style={{ marginTop: "20px" }}>
+                <Grid container spacing={8} justifyContent={'center'}>
+                    <Grid>< Prayer image="1.png" name='الفجر' time={timings.Fajr} /></Grid>
+
+                    <Grid><Prayer image="2.png" name='الظهر' time={timings.Dhuhr} /></Grid>
+
+                    <Grid> <Prayer image="3.png" name='العصر' time={timings.Asr} /></Grid>
 
 
-                <Prayer name='الفجر' time={timings.Fajr} />
 
-                <Prayer name='الظهر' time={timings.Dhuhr} />
+                    <Grid><Prayer image="4.png" name='المغرب' time={timings.Maghrib} /></Grid>
 
-                <Prayer name='العصر' time={timings.Asr} />
-                <Prayer name='المغرب' time={timings.Maghrib} />
 
-                <Prayer name='العشاء' time={timings.Isha} />
+
+                    <Grid><Prayer image="5.png" name='العشاء' time={timings.Isha} /></Grid>
+
+                </Grid>
+
+
 
 
             </Stack>

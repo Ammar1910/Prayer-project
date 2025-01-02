@@ -1,9 +1,4 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-} */
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
 
 html {
@@ -51,7 +46,7 @@ html {
 }
 
 body {
-  background-color: #61473e;
+  background-color: #513c35;
   color: white;
 }
 
@@ -61,4 +56,48 @@ body {
 
 .MuiSvgIcon-root {
   color: white !important;
+}
+
+@media (max-width : 550px) {
+
+  .fontResponsive{
+    font-size: 20px !important;
+  }
+  
+}
+@media (max-width : 480px) {
+  .fontResponsive{
+    font-size: 17px !important;
+  }
+  
+}
+@media (max-width : 420px) {
+  .fontResponsive{
+    font-size: 10px !important;
+  }
+  
+}
+@media (max-width : 720px) {
+  .fontResponsive{
+    font-size: 25px !important;
+  }
+  
+}
+@media (max-width : 720px) {
+  .x{
+    font-size: 22px !important;
+  }
+  
+}
+@media (max-width : 550px) {
+  .x{
+    font-size: 18px !important;
+  }
+  
+}
+@media (max-width : 420) {
+  .x{
+    font-size: 14px !important;
+  }
+  
 }
